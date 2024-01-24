@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hello World</title>
+</head>
+<body>
+    <h1>Hello World!</h1>
+    <button onclick="clickButton()">click!</button>
+    <button onclick="updateButton()">update!</button>
+    <textarea readonly></textarea>
+    <script>
+        function clickButton() { // JS function to perform the clicks on the "click!" button
+            const timestamp = Math.floor(Date.now() / 1000); // generates a timestamp in a given format
+            // Date.now() is current timestamp in milliseconds
+            // Math.floor rounds the result to the nearest whole number
+            // Division by thousands converts milliseconds to seconds
+            fetch('/clicks', { // fetch initiates a HTTP request from the route /clicks
+                method: 'POST', //from the method POST
+                headers: {
+                    'Content-Type': 'application/json', // sets the Content-Type format of header of the request to indicate that the request body is in JSON format
+                },
+                body: JSON.stringify({ timestamp }), // turns a JS variable "timestamp" into a JSON string (serialization)
+            });
+        }
+
+        function updateButton() { // JS funktion to update the array output in the textarea
+            fetch('/clicks') // fetch initiates a HTTP request from the route /clicks
+                .then(response => response.json()) // gets the JSON response as a JS variable
+                .then(data => {  // data is a variable, that gets the content of the JSON response, after it was parsed
+                    const textarea = document.querySelector('textarea'); // selects the textarea object on the webpage
+                    textarea.value = JSON.stringify(data, null, 2); // sets the value of the textarea, turning the data from a JS variable "data" into a JSON string
+                    // data is the variable to stringify, null is the replacement (no specific replacements needed), 2 is the indentation (for better formatting, otherwise all values are printed in the same line) 
+                });
+        }
+    </script>
+</body>
+</html>
