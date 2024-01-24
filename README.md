@@ -1,5 +1,7 @@
 # Click Tracker Flask Project
 
+This is a simple Flask Project that I created for a university assignment.
+
 ## Overview
 
 The Click Tracker Flask Projet is a small web application created during the assignment 01 using Python and Flask in the backend and HTML and JavaScript in the frongtent. 
